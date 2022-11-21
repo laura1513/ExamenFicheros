@@ -1,11 +1,20 @@
+import javax.xml.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
+@XmlAccessorType (XmlAccessType.FIELD)
+@XmlRootElement (name = "diver")
 public class Piloto {
+    @XmlElement(name = "name")
     private String nombre;
+    @XmlAttribute(name = "number")
     private int numero;
+    @XmlElement(name = "team")
     private String equipo;
+    @XmlElement(name = "dob")
     private LocalDate fechaNacimiento;
+    public Piloto() {
+
+    }
 
     // Getters
     public String getNombre() { return nombre; }
