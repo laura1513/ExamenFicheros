@@ -18,12 +18,12 @@ public class Mundial {
 
     public static List<Piloto> leerPilotos(){
         List<Piloto> pilotos = new ArrayList<>();
-        Path ficero = Path.of("data/pilotos.xml");
+        Path fichero = Path.of("data/pilotos.xml");
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(ArrayListPilotos.class);
             Unmarshaller jaxUnmarshaller = context.createUnmarshaller();
-            ArrayListPilotos pilots = (ArrayListPilotos) jaxUnmarshaller.unmarshal(ficero.toFile());
+            ArrayListPilotos pilots = (ArrayListPilotos) jaxUnmarshaller.unmarshal(fichero.toFile());
             ArrayList<Piloto> pil = pilots.getPilotos();
             for (Piloto p : pil) {
                 Piloto pi = new Piloto();
@@ -81,15 +81,15 @@ public class Mundial {
     }
 
     public static void imprimirClasificacionFinal(List<Resultado> resultados) {
-        HashMap<String, Double> clasificacion = new HashMap<>();
+        HashMap<String, Double> classification = new HashMap<>();
         for (Resultado res : resultados)  {
-            if (!clasificacion.containsKey(res.getPiloto().getNombre())) {
-                clasificacion.put(res.getPiloto().getNombre(), res.getPuntos());
+            if (!classification.containsKey(res.getPiloto().getNombre())) {
+                classification.put(res.getPiloto().getNombre(), res.getPuntos());
             } else {
-                clasificacion.put(res.getPiloto().getNombre(), clasificacion.get(res.getPiloto().getNombre())+res.getPuntos());
+                classification.put(res.getPiloto().getNombre(), classification.get(res.getPiloto().getNombre())+res.getPuntos());
             }
         }
-        clasificacion.entrySet().stream().filter(p -> p.getValue()>=0).sorted((p1, p2) ->Double.compare(p2.getValue(), p1.getValue())).forEach(System.out::println);
+        classification.entrySet().stream().filter(p -> p.getValue()>=0).sorted((p1, p2) ->Double.compare(p2.getValue(), p1.getValue())).forEach(System.out::println);
     }
 
     public static void imprimirMayoresde30(List<Piloto> pilotos) {
@@ -107,5 +107,7 @@ public class Mundial {
         imprimirClasificacionFinal(resultados);
 
         imprimirMayoresde30(pilotos);
+
+        //El csv si funciona, solo hay que comentar el resto del código para comprobarlo
     }
 }
