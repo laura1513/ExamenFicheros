@@ -93,7 +93,6 @@ public class Mundial {
     }
 
     public static void imprimirMayoresde30(List<Piloto> pilotos) {
-
     }
 
     public static void main(String[] args) throws JAXBException {
